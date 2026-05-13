@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bridging Belief & Reason | MindBridge | Mahindra University 2026</title>
+<meta name="description" content="Design Thinking Project 2026 — Technology Solutions for Black Magic Distress. B.Tech 2nd Year, Mahindra University."/>
+<meta property="og:title" content="Bridging Belief & Reason | MindBridge"/>
+<meta property="og:description" content="A culturally-sensitive AI chatbot for supernatural distress support."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          primary:   '#6C9BCF',
+          secondary: '#F4A261',
+          accent:    '#81B29A',
+          alert:     '#E76F51',
+          bg:        '#F8FAFC',
+          ink:       '#1E293B',
+        },
+        fontFamily: {
+          display: ['"Playfair Display"', 'Georgia', 'serif'],
+          body:    ['"DM Sans"', 'system-ui', 'sans-serif'],
+        },
+        borderRadius: { xl2: '12px' },
+      }
+    }
+  }
+</script>
+<style>
+  :root {
+    --primary:   #6C9BCF;
+    --secondary: #F4A261;
+    --accent:    #81B29A;
+    --alert:     #E76F51;
+    --bg:        #F8FAFC;
+    --ink:       #1E293B;
+    --card-shadow: 0 4px 24px rgba(108,155,207,0.10);
+    --card-hover:  0 12px 40px rgba(108,155,207,0.22);
+  }
+  .dark {
+    --bg: #0f172a;
+    --ink: #e2e8f0;
+    --card-shadow: 0 4px 24px rgba(0,0,0,0.35);
+    --card-hover:  0 12px 40px rgba(108,155,207,0.25);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--ink); transition: background .3s, color .3s; }
+  h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; }
+
+  /* FADE-UP ANIMATION */
+  .fade-up { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up-delay-1 { transition-delay: .1s; }
+  .fade-up-delay-2 { transition-delay: .2s; }
+  .fade-up-delay-3 { transition-delay: .3s; }
+  .fade-up-delay-4 { transition-delay: .4s; }
+
+  /* CARD HOVER */
+  .card { box-shadow: var(--card-shadow); border-radius: 12px; transition: box-shadow .3s, transform .3s; }
+  .card:hover { box-shadow: var(--card-hover); transform: translateY(-4px); }
+
+  /* HERO SHAPES */
+  .shape { position: absolute; border-radius: 50%; opacity: .07; }
+  .shape-1 { width:340px; height:340px; background: var(--primary); top:-80px; right:-60px; }
+  .shape-2 { width:200px; height:200px; background: var(--secondary); bottom:40px; left:20px; }
+  .shape-3 { width:120px; height:120px; background: var(--accent); top:50%; right:18%; }
+
+  /* GRADIENT HERO */
+  .hero-gradient {
+    background: linear-gradient(135deg, #eaf2fb 0%, #f8fafc 50%, #fef3e8 100%);
+  }
+  .dark .hero-gradient {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #1a1610 100%);
+  }
+
+  /* STAT CARD ACCENT */
+  .stat-accent { border-top: 4px solid var(--primary); }
+  .stat-accent:nth-child(2) { border-color: var(--secondary); }
+  .stat-accent:nth-child(3) { border-color: var(--accent); }
+  .stat-accent:nth-child(4) { border-color: var(--alert); }
+
+  /* STICKY NOTE */
+  .sticky { transform: rotate(-1deg); }
+  .sticky:nth-child(2) { transform: rotate(1deg); }
+  .sticky:nth-child(3) { transform: rotate(-0.5deg); }
+
+  /* WHY FLOW */
+  .why-step { position: relative; }
+  .why-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -28px;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 28px;
+    background: var(--primary);
+    opacity: .4;
+  }
+
+  /* DARK MODE CARD */
+  .dark .bg-white { background: #1e293b !important; }
+  .dark .bg-gray-50 { background: #0f172a !important; }
+  .dark .text-gray-600 { color: #94a3b8 !important; }
+  .dark .text-gray-500 { color: #64748b !important; }
+  .dark .border-gray-200 { border-color: #334155 !important; }
+
+  /* NAV ACTIVE */
+  .nav-link { position: relative; }
+  .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:var(--primary); transition:width .3s; }
+  .nav-link:hover::after { width:100%; }
+
+  /* MERMAID */
+  .mermaid-wrap { overflow-x: auto; }
+  .mermaid svg { max-width: 100%; }
+
+  /* FUNNEL */
+  .funnel-step { clip-path: polygon(5% 0, 95% 0, 90% 100%, 10% 100%); }
+  .funnel-step:last-child { clip-path: polygon(10% 0, 90% 0, 85% 100%, 15% 100%); }
+
+  /* TEAM CARD */
+  .team-avatar { width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.4rem; font-weight:700; color:#fff; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-thumb { background: var(--primary); border-radius:3px; }
+
+  /* BUTTON */
+  .btn-primary { background: var(--primary); color: #fff; border-radius:8px; padding:.65rem 1.4rem; font-weight:600; transition: background .2s, transform .15s; display:inline-flex; align-items:center; gap:.4rem; }
+  .btn-primary:hover { background: #5585b8; transform: translateY(-1px); }
+  .btn-secondary { background: transparent; border: 2px solid var(--secondary); color: var(--secondary); border-radius:8px; padding:.6rem 1.35rem; font-weight:600; transition: background .2s; display:inline-flex; align-items:center; gap:.4rem; }
+  .btn-secondary:hover { background: var(--secondary); color: #fff; }
+  .btn-accent { background: var(--accent); color: #fff; border-radius:8px; padding:.6rem 1.35rem; font-weight:600; transition: background .2s; display:inline-flex; align-items:center; gap:.4rem; }
+  .btn-accent:hover { background: #6a9880; }
+
+  /* QUOTE BOX */
+  .quote-box { border-left: 4px solid var(--secondary); background: linear-gradient(90deg,rgba(244,162,97,.08),transparent); }
+
+  /* SECTION LABEL */
+  .section-label { font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color: var(--primary); }
+</style>
+</head>
+<body class="bg-bg text-ink">
+
+<!-- ============ NAV ============ -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 dark:bg-slate-900/80 backdrop-blur border-b border-transparent" style="border-color:rgba(108,155,207,.12)">
+  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-14">
+    <a href="#hero" class="flex items-center gap-2 font-display font-bold text-lg text-ink dark:text-slate-100">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="15" fill="#6C9BCF" fill-opacity=".12" stroke="#6C9BCF" stroke-width="1.5"/>
+        <path d="M10 20 Q12 10 16 12 Q20 14 22 10" stroke="#6C9BCF" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <path d="M13 22 Q14 17 16 18 Q18 19 19 16" stroke="#F4A261" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <circle cx="16" cy="14" r="2.5" fill="#81B29A" opacity=".7"/>
+      </svg>
+      MindBridge
+    </a>
+    <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a href="#context"   class="nav-link text-gray-600 dark:text-slate-300 hover:text-primary">Context</a>
+      <a href="#evidence"  class="nav-link text-gray-600 dark:text-slate-300 hover:text-primary">Evidence</a>
+      <a href="#solution"  class="nav-link text-gray-600 dark:text-slate-300 hover:text-primary">Solution</a>
+      <a href="#prototype" class="nav-link text-gray-600 dark:text-slate-300 hover:text-primary">Prototype</a>
+      <a href="#team"      class="nav-link text-gray-600 dark:text-slate-300 hover:text-primary">Team</a>
+    </div>
+    <button id="darkToggle" aria-label="Toggle dark mode" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition">
+      <svg id="sunIcon" class="hidden w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="moonIcon" class="w-5 h-5 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="hero" class="hero-gradient relative overflow-hidden pt-28 pb-20 md:pt-36 md:pb-28">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+
+  <!-- Floating dots grid -->
+  <svg class="absolute inset-0 w-full h-full opacity-[.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+    <pattern id="dots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#6C9BCF"/>
+    </pattern>
+    <rect width="100%" height="100%" fill="url(#dots)"/>
+  </svg>
+
+  <div class="max-w-6xl mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-12">
+    <div class="flex-1 text-center md:text-left">
+      <!-- Logo SVG -->
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6 fade-up" style="background:linear-gradient(135deg,#6C9BCF22,#81B29A22);border:1.5px solid #6C9BCF44">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="26" cy="28" rx="18" ry="14" fill="#6C9BCF" fill-opacity=".15" stroke="#6C9BCF" stroke-width="1.5"/>
+          <path d="M14 30 Q17 18 22 20 Q26 22 26 17 Q26 12 30 14 Q36 16 38 22" stroke="#6C9BCF" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="26" cy="17" r="3" fill="#F4A261" opacity=".85"/>
+          <path d="M20 36 Q23 31 26 32 Q29 33 32 30" stroke="#81B29A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M18 24 C16 22 13 24 14 27" stroke="#E76F51" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".7"/>
+          <path d="M34 24 C36 22 39 24 38 27" stroke="#E76F51" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".7"/>
+        </svg>
+      </div>
+
+      <p class="section-label mb-3 fade-up fade-up-delay-1">Design Thinking Project 2026</p>
+      <h1 class="text-4xl md:text-6xl font-display font-black leading-tight mb-4 fade-up fade-up-delay-1" style="color:var(--ink)">
+        Bridging Belief<br/><span style="color:var(--primary)">&amp; Reason</span>
+      </h1>
+      <p class="text-xl md:text-2xl font-display text-gray-500 dark:text-slate-400 mb-3 fade-up fade-up-delay-2">Technology Solutions for Black Magic Distress</p>
+      <p class="text-sm text-gray-400 dark:text-slate-500 mb-8 fade-up fade-up-delay-2">B.Tech 2nd Year &nbsp;·&nbsp; Mahindra University &nbsp;·&nbsp; 2026</p>
+      <div class="flex flex-wrap gap-3 justify-center md:justify-start fade-up fade-up-delay-3">
+        <a href="#context"   class="btn-primary">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          View Research
+        </a>
+        <a href="#prototype" class="btn-secondary">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          See Prototype
+        </a>
+        <a href="#team"      class="btn-accent">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Meet the Team
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero illustration -->
+    <div class="flex-shrink-0 fade-up fade-up-delay-4">
+      <svg width="320" height="280" viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-90">
+        <!-- Background circle -->
+        <circle cx="160" cy="140" r="120" fill="#6C9BCF" fill-opacity=".06" stroke="#6C9BCF" stroke-width="1" stroke-dasharray="6 4"/>
+        <!-- Brain outline -->
+        <path d="M100 160 Q95 130 105 115 Q115 100 130 100 Q140 95 150 100 Q158 88 168 92 Q180 88 188 100 Q202 98 210 112 Q220 126 215 145 Q220 162 210 175 Q198 186 182 184 Q172 196 158 192 Q145 200 132 190 Q115 192 106 178 Q96 172 100 160Z" fill="#6C9BCF" fill-opacity=".12" stroke="#6C9BCF" stroke-width="2"/>
+        <!-- Brain folds -->
+        <path d="M130 120 Q138 112 148 118 Q156 112 164 118" stroke="#6C9BCF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M125 140 Q135 132 145 138 Q155 130 165 138 Q175 132 185 138" stroke="#6C9BCF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M128 158 Q140 150 152 156 Q164 148 176 156" stroke="#6C9BCF" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Cultural symbols -->
+        <circle cx="105" cy="95" r="14" fill="#F4A261" fill-opacity=".18" stroke="#F4A261" stroke-width="1.5"/>
+        <text x="99" y="100" font-size="14" fill="#F4A261" font-family="serif">☽</text>
+        <circle cx="215" cy="95" r="14" fill="#81B29A" fill-opacity=".18" stroke="#81B29A" stroke-width="1.5"/>
+        <text x="208" y="100" font-size="14" fill="#81B29A" font-family="serif">✦</text>
+        <circle cx="160" cy="60" r="14" fill="#E76F51" fill-opacity=".15" stroke="#E76F51" stroke-width="1.5"/>
+        <text x="153" y="66" font-size="14" fill="#E76F51" font-family="serif">⊕</text>
+        <!-- Connection lines -->
+        <line x1="105" y1="105" x2="128" y2="118" stroke="#F4A261" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/>
+        <line x1="215" y1="105" x2="192" y2="116" stroke="#81B29A" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/>
+        <line x1="160" y1="70" x2="160" y2="98" stroke="#E76F51" stroke-width="1" stroke-dasharray="3 2" opacity=".5"/>
+        <!-- Floating dots -->
+        <circle cx="75" cy="160" r="5" fill="#6C9BCF" opacity=".3"/>
+        <circle cx="245" cy="155" r="5" fill="#F4A261" opacity=".3"/>
+        <circle cx="90" cy="200" r="3.5" fill="#81B29A" opacity=".25"/>
+        <circle cx="230" cy="195" r="3.5" fill="#E76F51" opacity=".25"/>
+        <!-- Label -->
+        <rect x="118" y="210" width="84" height="26" rx="13" fill="#6C9BCF" fill-opacity=".12" stroke="#6C9BCF" stroke-width="1"/>
+        <text x="160" y="228" text-anchor="middle" font-size="11" fill="#6C9BCF" font-family="DM Sans, sans-serif" font-weight="600">MindBridge</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTEXT ============ -->
+<section id="context" class="py-20 bg-white dark:bg-slate-900">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">Background</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-12 fade-up" style="color:var(--ink)">Research Context</h2>
+
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+      <div class="fade-up">
+        <p class="text-gray-600 dark:text-slate-300 leading-relaxed mb-6 text-[1.05rem]">
+          We surveyed <strong>127 Mahindra University students</strong> (18–25 yrs) and conducted <strong>5 in-depth interviews</strong> to understand how young adults navigate unexplained experiences and beliefs in black magic. Many sit in a "gray zone" between scientific education and cultural tradition, often facing distress without integrated support.
+        </p>
+        <p class="text-gray-600 dark:text-slate-300 leading-relaxed mb-8 text-[1.05rem]">
+          Our research uncovered a critical gap: existing support systems — medical, spiritual, or digital — fail to honour the complexity of this lived experience. Students wanted empathy, not judgment; understanding, not dismissal.
+        </p>
+
+        <div class="quote-box rounded-xl p-5 mb-6">
+          <p class="text-lg font-display italic text-gray-700 dark:text-slate-200 leading-relaxed">
+            "I don't know what I believe anymore. It sits in this uncomfortable middle space."
+          </p>
+          <p class="mt-3 text-sm text-gray-500 dark:text-slate-400 font-medium">— Interview Participant <em>(Pseudonym: Akhil)</em></p>
+        </div>
+
+        <div class="flex gap-4 flex-wrap">
+          <div class="flex items-center gap-2 bg-blue-50 dark:bg-slate-800 rounded-lg px-3 py-2">
+            <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+            <span class="text-sm font-medium text-gray-700 dark:text-slate-300">127 Survey Responses</span>
+          </div>
+          <div class="flex items-center gap-2 bg-amber-50 dark:bg-slate-800 rounded-lg px-3 py-2">
+            <span class="w-2 h-2 rounded-full bg-secondary inline-block"></span>
+            <span class="text-sm font-medium text-gray-700 dark:text-slate-300">5 In-depth Interviews</span>
+          </div>
+          <div class="flex items-center gap-2 bg-green-50 dark:bg-slate-800 rounded-lg px-3 py-2">
+            <span class="w-2 h-2 rounded-full bg-accent inline-block"></span>
+            <span class="text-sm font-medium text-gray-700 dark:text-slate-300">18–25 Age Group</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campus illustration -->
+      <div class="fade-up fade-up-delay-2">
+        <div class="card bg-gray-50 dark:bg-slate-800 p-6 rounded-xl2">
+          <svg width="100%" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+            <!-- Campus building -->
+            <rect x="140" y="100" width="120" height="100" rx="4" fill="#6C9BCF" fill-opacity=".2" stroke="#6C9BCF" stroke-width="1.5"/>
+            <rect x="170" y="80" width="60" height="40" rx="3" fill="#6C9BCF" fill-opacity=".3" stroke="#6C9BCF" stroke-width="1.5"/>
+            <rect x="192" y="55" width="16" height="30" fill="#F4A261" fill-opacity=".6"/>
+            <!-- Windows -->
+            <rect x="155" y="115" width="16" height="12" rx="2" fill="#6C9BCF" fill-opacity=".5"/>
+            <rect x="183" y="115" width="16" height="12" rx="2" fill="#6C9BCF" fill-opacity=".5"/>
+            <rect x="211" y="115" width="16" height="12" rx="2" fill="#6C9BCF" fill-opacity=".5"/>
+            <rect x="239" y="115" width="16" height="12" rx="2" fill="#6C9BCF" fill-opacity=".5"/>
+            <rect x="155" y="138" width="16" height="12" rx="2" fill="#6C9BCF" fill-opacity=".5"/>
+            <rect x="183" y="138" width="16" height="12" rx="2" fill="#6C9BCF" fill-opacity=".5"/>
+            <rect x="211" y="138" width="16" height="12" rx="2" fill="#6C9BCF" fill-opacity=".5"/>
+            <rect x="239" y="138" width="16" height="12" rx="2" fill="#6C9BCF" fill-opacity=".5"/>
+            <!-- Door -->
+            <rect x="189" y="165" width="22" height="35" rx="11" fill="#F4A261" fill-opacity=".5" stroke="#F4A261" stroke-width="1"/>
+            <!-- Ground -->
+            <rect x="80" y="200" width="240" height="6" rx="3" fill="#81B29A" fill-opacity=".3"/>
+            <!-- Trees -->
+            <circle cx="105" cy="185" r="22" fill="#81B29A" fill-opacity=".35"/>
+            <rect x="102" y="196" width="6" height="18" rx="3" fill="#81B29A" fill-opacity=".5"/>
+            <circle cx="295" cy="185" r="18" fill="#81B29A" fill-opacity=".35"/>
+            <rect x="292" y="195" width="6" height="18" rx="3" fill="#81B29A" fill-opacity=".5"/>
+            <!-- People silhouettes -->
+            <circle cx="130" cy="196" r="6" fill="#6C9BCF" fill-opacity=".5"/>
+            <rect x="127" y="202" width="6" height="14" rx="3" fill="#6C9BCF" fill-opacity=".4"/>
+            <circle cx="270" cy="196" r="6" fill="#F4A261" fill-opacity=".5"/>
+            <rect x="267" y="202" width="6" height="14" rx="3" fill="#F4A261" fill-opacity=".4"/>
+            <!-- Survey speech bubbles -->
+            <rect x="50" y="145" width="65" height="32" rx="8" fill="white" stroke="#6C9BCF" stroke-width="1.2" opacity=".9"/>
+            <text x="83" y="165" text-anchor="middle" font-size="9.5" fill="#6C9BCF" font-family="DM Sans,sans-serif" font-weight="600">Survey: 127</text>
+            <polygon points="83,177 76,177 80,184" fill="white" stroke="#6C9BCF" stroke-width="1.2"/>
+            <rect x="285" y="145" width="65" height="32" rx="8" fill="white" stroke="#F4A261" stroke-width="1.2" opacity=".9"/>
+            <text x="318" y="165" text-anchor="middle" font-size="9.5" fill="#F4A261" font-family="DM Sans,sans-serif" font-weight="600">Gray Zone</text>
+            <polygon points="318,177 311,177 315,184" fill="white" stroke="#F4A261" stroke-width="1.2"/>
+            <!-- Label -->
+            <text x="200" y="245" text-anchor="middle" font-size="11" fill="#94a3b8" font-family="DM Sans,sans-serif">Mahindra University Campus, 2025</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVIDENCE ============ -->
+<section id="evidence" class="py-20 bg-gray-50 dark:bg-slate-950">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">Survey Insights</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 fade-up">What We Found</h2>
+    <p class="text-gray-500 dark:text-slate-400 mb-12 max-w-2xl fade-up fade-up-delay-1">Data drawn from 127 verified responses. Patterns reveal fragmented support, cultural-scientific tension, and high demand for non-judgmental guidance.</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+      <!-- Stat 1 -->
+      <div class="card stat-accent bg-white dark:bg-slate-800 p-6 fade-up">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:#6C9BCF22">
+            <svg class="w-5 h-5" style="color:var(--primary)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Belief Distribution</span>
+        </div>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between items-center">
+            <span class="text-gray-600 dark:text-slate-300">Yes, I believe</span>
+            <span class="font-bold text-primary">34.6%</span>
+          </div>
+          <div class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5"><div class="h-1.5 rounded-full bg-primary" style="width:34.6%"></div></div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-600 dark:text-slate-300">No, I don't</span>
+            <span class="font-bold text-gray-400">34.6%</span>
+          </div>
+          <div class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5"><div class="h-1.5 rounded-full bg-gray-300 dark:bg-slate-500" style="width:34.6%"></div></div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-600 dark:text-slate-300">Maybe / Unsure</span>
+            <span class="font-bold text-secondary">30.7%</span>
+          </div>
+          <div class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5"><div class="h-1.5 rounded-full bg-secondary" style="width:30.7%"></div></div>
+        </div>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="card stat-accent bg-white dark:bg-slate-800 p-6 fade-up fade-up-delay-1">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:#F4A26122">
+            <svg class="w-5 h-5" style="color:var(--secondary)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Mental Health Impact</span>
+        </div>
+        <div class="text-center py-4">
+          <p class="text-5xl font-display font-black" style="color:var(--secondary)">53.5%</p>
+          <p class="text-sm text-gray-500 dark:text-slate-400 mt-2">report "A Lot" or "Somewhat" affected</p>
+        </div>
+        <div class="bg-amber-50 dark:bg-slate-700 rounded-lg p-3 text-xs text-gray-600 dark:text-slate-300 text-center">More than half of respondents experienced mental health distress</div>
+      </div>
+
+      <!-- Stat 3 -->
+      <div class="card stat-accent bg-white dark:bg-slate-800 p-6 fade-up fade-up-delay-2">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:#81B29A22">
+            <svg class="w-5 h-5" style="color:var(--accent)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Help-Seeking</span>
+        </div>
+        <div class="text-center py-4">
+          <p class="text-5xl font-display font-black" style="color:var(--accent)">51.2%</p>
+          <p class="text-sm text-gray-500 dark:text-slate-400 mt-2">prefer medical or combined support</p>
+        </div>
+        <div class="bg-green-50 dark:bg-slate-700 rounded-lg p-3 text-xs text-gray-600 dark:text-slate-300 text-center">Demand for integrated pathways is clear</div>
+      </div>
+
+      <!-- Stat 4 -->
+      <div class="card stat-accent bg-white dark:bg-slate-800 p-6 fade-up fade-up-delay-3">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:#E76F5122">
+            <svg class="w-5 h-5" style="color:var(--alert)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Experience Rate</span>
+        </div>
+        <div class="text-center py-4">
+          <p class="text-5xl font-display font-black" style="color:var(--alert)">45.8%</p>
+          <p class="text-sm text-gray-500 dark:text-slate-400 mt-2">reported unexplained phenomena</p>
+        </div>
+        <div class="bg-red-50 dark:bg-slate-700 rounded-lg p-3 text-xs text-gray-600 dark:text-slate-300 text-center">Nearly half have lived through unexplained events</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAIN POINTS ============ -->
+<section id="painpoints" class="py-20 bg-white dark:bg-slate-900">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">User Research</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-12 fade-up">The Human Challenge</h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Pain Points -->
+      <div class="card bg-red-50 dark:bg-red-950/30 border border-red-100 dark:border-red-900/40 p-7 fade-up">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-alert/20 flex items-center justify-center">
+            <svg class="w-5 h-5" style="color:var(--alert)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-display font-bold" style="color:var(--alert)">Pain Points</h3>
+        </div>
+        <ul class="space-y-4">
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-alert flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Cognitive Dissonance</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">Tension between scientific education and lived spiritual experience</p>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-alert flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Fragmented Support</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">Medical dismisses spirituality; spiritual ignores mental health</p>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-alert flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Social Isolation</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">Fear of judgment prevents people from seeking help</p>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-alert flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Exploitation Risk</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">Unverified practitioners exploit vulnerable individuals</p>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-alert flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">No Safe Space</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">No platform for processing uncertainty without stigma</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Needs -->
+      <div class="card bg-green-50 dark:bg-green-950/30 border border-green-100 dark:border-green-900/40 p-7 fade-up fade-up-delay-2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center">
+            <svg class="w-5 h-5" style="color:var(--accent)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-xl font-display font-bold" style="color:var(--accent)">Validated Needs</h3>
+        </div>
+        <ul class="space-y-4">
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-accent flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Integrated Support Pathways</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">Medical + cultural support working together, not in silos</p>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-accent flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Practitioner Verification</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">System to identify legitimate vs exploitative practitioners</p>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-accent flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Accessible Psychoeducation</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">Respectful, jargon-free information about beliefs and psychology</p>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-accent flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Anonymous Spaces</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">Judgment-free discussion without identity exposure</p>
+            </div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-2 h-2 rounded-full bg-accent flex-shrink-0 mt-2"></span>
+            <div>
+              <p class="font-semibold text-gray-700 dark:text-slate-200">Immediate Grounding Tools</p>
+              <p class="text-sm text-gray-500 dark:text-slate-400">Rapid distress relief during acute episodes</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROOT CAUSE ============ -->
+<section id="rootcause" class="py-20 bg-gray-50 dark:bg-slate-950">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">5 Whys Analysis</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-12 fade-up">Digging to the Core</h2>
+
+    <div class="max-w-3xl mx-auto">
+      <!-- Why flow steps -->
+      <div class="space-y-0">
+        <div class="why-step fade-up mb-8 text-center relative">
+          <div class="inline-block card bg-white dark:bg-slate-800 border-2 border-red-200 dark:border-red-800 px-6 py-4 rounded-xl2 max-w-lg">
+            <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--alert)">Problem Statement</span>
+            <p class="font-semibold text-gray-800 dark:text-slate-100 mt-1">Young adults experiencing supernatural distress have no safe, effective support</p>
+          </div>
+        </div>
+
+        <div class="flex justify-center mb-2"><svg width="20" height="28" viewBox="0 0 20 28"><path d="M10 0 L10 20 M4 14 L10 22 L16 14" stroke="#6C9BCF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg></div>
+
+        <div class="why-step fade-up fade-up-delay-1 mb-8 text-center">
+          <div class="inline-block card bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900 px-6 py-3 rounded-xl2 max-w-lg">
+            <span class="text-xs font-bold uppercase tracking-wider text-primary">Why #1</span>
+            <p class="font-medium text-gray-700 dark:text-slate-200 mt-1">Existing support systems (medical or spiritual) do not integrate both dimensions</p>
+          </div>
+        </div>
+
+        <div class="flex justify-center mb-2"><svg width="20" height="28" viewBox="0 0 20 28"><path d="M10 0 L10 20 M4 14 L10 22 L16 14" stroke="#6C9BCF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg></div>
+
+        <div class="why-step fade-up fade-up-delay-2 mb-8 text-center">
+          <div class="inline-block card bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900 px-6 py-3 rounded-xl2 max-w-lg">
+            <span class="text-xs font-bold uppercase tracking-wider text-primary">Why #2</span>
+            <p class="font-medium text-gray-700 dark:text-slate-200 mt-1">Cultural beliefs are treated as invalid by medical institutions and vice versa</p>
+          </div>
+        </div>
+
+        <div class="flex justify-center mb-2"><svg width="20" height="28" viewBox="0 0 20 28"><path d="M10 0 L10 20 M4 14 L10 22 L16 14" stroke="#6C9BCF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg></div>
+
+        <div class="why-step fade-up fade-up-delay-3 mb-8 text-center">
+          <div class="inline-block card bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900 px-6 py-3 rounded-xl2 max-w-lg">
+            <span class="text-xs font-bold uppercase tracking-wider text-primary">Why #3</span>
+            <p class="font-medium text-gray-700 dark:text-slate-200 mt-1">No shared framework exists to hold scientific and cultural explanations simultaneously</p>
+          </div>
+        </div>
+
+        <div class="flex justify-center mb-2"><svg width="20" height="28" viewBox="0 0 20 28"><path d="M10 0 L10 20 M4 14 L10 22 L16 14" stroke="#6C9BCF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg></div>
+
+        <div class="why-step fade-up mb-8 text-center">
+          <div class="inline-block card bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900 px-6 py-3 rounded-xl2 max-w-lg">
+            <span class="text-xs font-bold uppercase tracking-wider text-primary">Why #4</span>
+            <p class="font-medium text-gray-700 dark:text-slate-200 mt-1">Technology solutions in this space have been built for one audience, not the "gray zone"</p>
+          </div>
+        </div>
+
+        <div class="flex justify-center mb-2"><svg width="20" height="28" viewBox="0 0 20 28"><path d="M10 0 L10 20 M4 14 L10 22 L16 14" stroke="#F4A261" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+        <!-- Root Cause -->
+        <div class="fade-up text-center">
+          <div class="inline-block card px-8 py-6 rounded-xl2 max-w-2xl border-2" style="background:linear-gradient(135deg,#F4A26118,#6C9BCF12);border-color:#F4A261">
+            <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--secondary)">🎯 Root Cause</span>
+            <p class="font-semibold text-gray-800 dark:text-slate-100 mt-2 leading-relaxed">
+              No culturally-sensitive platforms exist that <span style="color:var(--primary)">(1)</span> distinguish legitimate practices from exploitation, <span style="color:var(--primary)">(2)</span> explain psychological mechanisms accessibly, <span style="color:var(--primary)">(3)</span> provide integrated support pathways, and <span style="color:var(--primary)">(4)</span> create safe spaces for the "gray zone" of uncertainty.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HMW ============ -->
+<section id="hmw" class="py-20 bg-white dark:bg-slate-900">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">Design Framing</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-12 fade-up">Framing the Opportunity</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="sticky card p-6 fade-up" style="background:linear-gradient(145deg,#FFF9E6,#FFF3CC);border:1px solid #F4A26140">
+        <div class="text-2xl mb-3">💭</div>
+        <p class="text-xs font-bold uppercase tracking-wider mb-3" style="color:var(--secondary)">How Might We…</p>
+        <p class="text-gray-700 font-medium leading-relaxed">Create safe, non-judgmental spaces for young adults to discuss unexplained experiences while accessing both scientific and cultural perspectives?</p>
+      </div>
+      <div class="sticky card p-6 fade-up fade-up-delay-1" style="background:linear-gradient(145deg,#E8F5E4,#D4EDCC);border:1px solid #81B29A40">
+        <div class="text-2xl mb-3">🔍</div>
+        <p class="text-xs font-bold uppercase tracking-wider mb-3" style="color:var(--accent)">How Might We…</p>
+        <p class="text-gray-700 font-medium leading-relaxed">Help users distinguish between legitimate cultural practitioners and those exploiting supernatural beliefs?</p>
+      </div>
+      <div class="sticky card p-6 fade-up fade-up-delay-2" style="background:linear-gradient(145deg,#E8F0FA,#D0E4F5);border:1px solid #6C9BCF40">
+        <div class="text-2xl mb-3">🤝</div>
+        <p class="text-xs font-bold uppercase tracking-wider mb-3" style="color:var(--primary)">How Might We…</p>
+        <p class="text-gray-700 font-medium leading-relaxed">Provide immediate, culturally-sensitive support for people experiencing distress after spiritual practices or unexplained events?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IDEATION ============ -->
+<section id="ideation" class="py-20 bg-gray-50 dark:bg-slate-950">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">Ideation Process</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 fade-up">From 120 Ideas to One Solution</h2>
+    <p class="text-gray-500 dark:text-slate-400 mb-12 max-w-2xl fade-up fade-up-delay-1">We ran a structured 6-3-5 brainstorming session across 8 team members, generating 120 unique concepts spanning apps, community interventions, education tools, and policy frameworks.</p>
+
+    <!-- Funnel -->
+    <div class="max-w-3xl mx-auto mb-12 fade-up">
+      <div class="space-y-2">
+        <div class="funnel-step bg-primary/20 dark:bg-primary/10 border border-primary/30 rounded-lg py-3 px-6 text-center">
+          <span class="font-semibold text-primary">📊 Research</span>
+          <span class="text-xs text-gray-500 dark:text-slate-400 ml-2">127 surveys + 5 interviews</span>
+        </div>
+        <div class="text-center text-gray-300 dark:text-slate-600 text-xl">↓</div>
+        <div class="funnel-step py-3 px-6 text-center rounded-lg" style="background:linear-gradient(90deg,#F4A26120,#F4A26108);border:1px solid #F4A26130">
+          <span class="font-semibold" style="color:var(--secondary)">💡 6-3-5 Brainstorm</span>
+          <span class="text-xs text-gray-500 dark:text-slate-400 ml-2">120 raw ideas from 8 members</span>
+        </div>
+        <div class="text-center text-gray-300 dark:text-slate-600 text-xl">↓</div>
+        <div class="funnel-step py-3 px-6 text-center rounded-lg" style="background:linear-gradient(90deg,#81B29A20,#81B29A08);border:1px solid #81B29A30">
+          <span class="font-semibold" style="color:var(--accent)">🔽 Filtering Criteria</span>
+          <span class="text-xs text-gray-500 dark:text-slate-400 ml-2">User Impact · Feasibility · Ethics</span>
+        </div>
+        <div class="text-center text-gray-300 dark:text-slate-600 text-xl">↓</div>
+        <div class="funnel-step py-3 px-6 text-center rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+          <span class="font-semibold text-gray-700 dark:text-slate-200">📋 Shortlist</span>
+          <span class="text-xs text-gray-500 dark:text-slate-400 ml-2">Top 10 concepts</span>
+        </div>
+        <div class="text-center text-gray-300 dark:text-slate-600 text-xl">↓</div>
+        <div class="py-4 px-6 text-center rounded-xl2 text-white font-bold text-lg" style="background:linear-gradient(135deg,var(--primary),#5585b8)">
+          🌟 MindBridge — Selected Concept
+        </div>
+      </div>
+    </div>
+
+    <!-- Runners up -->
+    <div class="fade-up">
+      <p class="text-sm font-semibold text-gray-500 dark:text-slate-400 text-center mb-4">Top 3 Runners-Up</p>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="card bg-white dark:bg-slate-800 p-4 text-center">
+          <div class="text-2xl mb-2">🏕️</div>
+          <p class="font-semibold text-gray-700 dark:text-slate-200">Integrated Health Camps</p>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Community-based combined medical & spiritual support</p>
+        </div>
+        <div class="card bg-white dark:bg-slate-800 p-4 text-center">
+          <div class="text-2xl mb-2">📋</div>
+          <p class="font-semibold text-gray-700 dark:text-slate-200">Practitioner Verification Directory</p>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Curated listing of vetted cultural practitioners</p>
+        </div>
+        <div class="card bg-white dark:bg-slate-800 p-4 text-center">
+          <div class="text-2xl mb-2">📱</div>
+          <p class="font-semibold text-gray-700 dark:text-slate-200">Digital Literacy Campaigns</p>
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">Education-first approach to supernatural misinformation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUTION ============ -->
+<section id="solution" class="py-20 bg-white dark:bg-slate-900">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">Selected Solution</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-1 fade-up">Introducing MindBridge</h2>
+    <p class="text-xl text-gray-500 dark:text-slate-400 mb-4 fade-up fade-up-delay-1 font-display italic">A Prompt-Powered Supernatural Distress Hotline</p>
+
+    <div class="max-w-3xl mb-10 fade-up fade-up-delay-2">
+      <p class="text-gray-600 dark:text-slate-300 leading-relaxed text-[1.05rem]">
+        MindBridge is a culturally-sensitive AI chatbot built entirely through careful system prompting and free LLM APIs. It meets users in moments of distress with <strong>empathy first, judgment never</strong>. No model training or complex backend required.
+      </p>
+    </div>
+
+    <!-- Feature grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up">
+        <div class="w-10 h-10 rounded-xl mb-3 flex items-center justify-center" style="background:#6C9BCF22">
+          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <h4 class="font-bold text-gray-800 dark:text-slate-100 mb-1">Belief-Aware Responses</h4>
+        <p class="text-sm text-gray-500 dark:text-slate-400">Validates spiritual views, gently offers psychological insights without dismissal</p>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-1">
+        <div class="w-10 h-10 rounded-xl mb-3 flex items-center justify-center" style="background:#81B29A22">
+          <svg class="w-5 h-5" style="color:var(--accent)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h4 class="font-bold text-gray-800 dark:text-slate-100 mb-1">Immediate Grounding</h4>
+        <p class="text-sm text-gray-500 dark:text-slate-400">One-tap breathing exercises & 5-4-3-2-1 technique for acute distress</p>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-2">
+        <div class="w-10 h-10 rounded-xl mb-3 flex items-center justify-center" style="background:#F4A26122">
+          <svg class="w-5 h-5" style="color:var(--secondary)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        </div>
+        <h4 class="font-bold text-gray-800 dark:text-slate-100 mb-1">Dual-Perspective Education</h4>
+        <p class="text-sm text-gray-500 dark:text-slate-400">Explains sleep paralysis, nocebo effect alongside cultural meanings</p>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up">
+        <div class="w-10 h-10 rounded-xl mb-3 flex items-center justify-center" style="background:#6C9BCF22">
+          <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h4 class="font-bold text-gray-800 dark:text-slate-100 mb-1">Verified Resource Directory</h4>
+        <p class="text-sm text-gray-500 dark:text-slate-400">Campus counselors + community-vetted practitioners in one place</p>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-1">
+        <div class="w-10 h-10 rounded-xl mb-3 flex items-center justify-center" style="background:#E76F5122">
+          <svg class="w-5 h-5" style="color:var(--alert)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </div>
+        <h4 class="font-bold text-gray-800 dark:text-slate-100 mb-1">Crisis Escalation</h4>
+        <p class="text-sm text-gray-500 dark:text-slate-400">Hard-coded rules for self-harm language → emergency contacts + human handoff</p>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-2">
+        <div class="w-10 h-10 rounded-xl mb-3 flex items-center justify-center" style="background:#81B29A22">
+          <svg class="w-5 h-5" style="color:var(--accent)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <h4 class="font-bold text-gray-800 dark:text-slate-100 mb-1">Privacy-First</h4>
+        <p class="text-sm text-gray-500 dark:text-slate-400">No login, no data storage unless explicitly opted in by the user</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROTOTYPE ============ -->
+<section id="prototype" class="py-20 bg-gray-50 dark:bg-slate-950">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">User Flow</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4 fade-up">How It Works</h2>
+    <p class="text-gray-500 dark:text-slate-400 mb-8 max-w-2xl fade-up fade-up-delay-1">Below is the complete user journey. The flow prioritizes immediate safety, then branches based on user need.</p>
+
+    <div class="card bg-white dark:bg-slate-800 p-6 rounded-xl2 fade-up mermaid-wrap mb-6">
+      <div class="mermaid text-sm">
+graph TD
+    A[User Opens Chat] --> B["Welcome: I'm here to listen, no judgment"]
+    B --> C{"Quick Check: Feeling distressed?"}
+    C -->|Yes| D[Immediate Grounding Exercise]
+    C -->|No| E["Main Menu: What would help you?"]
+    D --> E
+    E --> F1["💬 Share Experience"]
+    E --> F2["🧠 Understand Feelings"]
+    E --> F3["📍 Find Support"]
+    E --> F4["🌬️ Calm Down Now"]
+    F1 --> G[Journal Prompts + Pattern Insights]
+    F2 --> H[Psychoeducation + Cultural Context]
+    F3 --> I[Verified Resource Directory]
+    F4 --> J[Breathing + Audio Grounding]
+    G --> K["Follow-Up: Check in tomorrow?"]
+    H --> K
+    I --> K
+    J --> K
+    K --> L{User Response}
+    L -->|Yes| M[Set 24hr/72hr Reminder]
+    L -->|No| N[End Conversation]
+    M --> N
+    C -.->|"🚨 Crisis Keywords"| O[ESCALATION: Emergency Contacts + Human Handoff]
+    O --> N
+    classDef default fill:#f0f7ff,stroke:#6C9BCF,stroke-width:1.5px;
+    classDef decision fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
+    classDef alert fill:#ffebee,stroke:#c62828,stroke-width:2px;
+    class C,L decision;
+    class O alert;
+      </div>
+    </div>
+
+    <!-- MVP Note -->
+    <div class="card bg-white dark:bg-slate-800 border-l-4 p-5 rounded-xl2 fade-up" style="border-left-color:var(--accent)">
+      <div class="flex gap-3 items-start">
+        <div class="w-8 h-8 rounded-lg flex-shrink-0 flex items-center justify-center" style="background:var(--accent);background-opacity:.2;background:rgba(129,178,154,.2)">
+          <svg class="w-4 h-4" style="color:var(--accent)" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <p class="font-bold text-gray-800 dark:text-slate-100 mb-1">MVP Implementation Note</p>
+          <p class="text-sm text-gray-600 dark:text-slate-300">Built with <strong>prompt engineering + free LLM API</strong>. Deployable via Streamlit/Gradio or WhatsApp bot in under 1 hour. Tested with anonymized survey responses for cultural sensitivity. No model training required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section id="team" class="py-20 bg-white dark:bg-slate-900">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="section-label mb-2 fade-up">Credits</p>
+    <h2 class="text-3xl md:text-4xl font-display font-bold mb-12 fade-up">Meet the Team</h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+      <!-- Each team member card -->
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up">
+        <div class="team-avatar mb-3" style="background:linear-gradient(135deg,#6C9BCF,#5585b8)">GV</div>
+        <p class="font-bold text-gray-800 dark:text-slate-100">Gagan Veeravelly</p>
+        <p class="text-xs text-gray-400 dark:text-slate-500 font-mono mt-0.5">SE24UARI157</p>
+        <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium" style="background:#6C9BCF22;color:var(--primary)">Tech-First Solutions</span>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-1">
+        <div class="team-avatar mb-3" style="background:linear-gradient(135deg,#F4A261,#e08040)">AB</div>
+        <p class="font-bold text-gray-800 dark:text-slate-100">Agasthya Birudaraju</p>
+        <p class="text-xs text-gray-400 dark:text-slate-500 font-mono mt-0.5">SE24UARI117</p>
+        <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium" style="background:#F4A26122;color:var(--secondary)">Community Systems</span>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-2">
+        <div class="team-avatar mb-3" style="background:linear-gradient(135deg,#81B29A,#6a9880)">VY</div>
+        <p class="font-bold text-gray-800 dark:text-slate-100">Varshitha Yanamadala</p>
+        <p class="text-xs text-gray-400 dark:text-slate-500 font-mono mt-0.5">SE24UARI158</p>
+        <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium" style="background:#81B29A22;color:var(--accent)">Research Analysis</span>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-3">
+        <div class="team-avatar mb-3" style="background:linear-gradient(135deg,#E76F51,#c85a3d)">LR</div>
+        <p class="font-bold text-gray-800 dark:text-slate-100">Loka Rushwanth Reddy</p>
+        <p class="text-xs text-gray-400 dark:text-slate-500 font-mono mt-0.5">SE24UCSE115</p>
+        <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium" style="background:#E76F5122;color:var(--alert)">Safety & Policy · Lead</span>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up">
+        <div class="team-avatar mb-3" style="background:linear-gradient(135deg,#6C9BCF,#81B29A)">RT</div>
+        <p class="font-bold text-gray-800 dark:text-slate-100">Ravuri Tanai</p>
+        <p class="text-xs text-gray-400 dark:text-slate-500 font-mono mt-0.5">SE24UCSE093</p>
+        <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium" style="background:#6C9BCF22;color:var(--primary)">Healthcare Integration</span>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-1">
+        <div class="team-avatar mb-3" style="background:linear-gradient(135deg,#F4A261,#81B29A)">MJ</div>
+        <p class="font-bold text-gray-800 dark:text-slate-100">Mallabathula Jaswanth</p>
+        <p class="text-xs text-gray-400 dark:text-slate-500 font-mono mt-0.5">SE24UCSE124</p>
+        <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium" style="background:#F4A26122;color:var(--secondary)">Education & Content</span>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-2">
+        <div class="team-avatar mb-3" style="background:linear-gradient(135deg,#E76F51,#F4A261)">SM</div>
+        <p class="font-bold text-gray-800 dark:text-slate-100">Susain Manikanta Varma</p>
+        <p class="text-xs text-gray-400 dark:text-slate-500 font-mono mt-0.5">SE24UARI148</p>
+        <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium" style="background:#E76F5122;color:var(--alert)">Creative Design</span>
+      </div>
+      <div class="card bg-gray-50 dark:bg-slate-800 p-5 fade-up fade-up-delay-3">
+        <div class="team-avatar mb-3" style="background:linear-gradient(135deg,#81B29A,#6C9BCF)">SP</div>
+        <p class="font-bold text-gray-800 dark:text-slate-100">Sathphala Reddy Puram</p>
+        <p class="text-xs text-gray-400 dark:text-slate-500 font-mono mt-0.5">SE24UARI099</p>
+        <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full font-medium" style="background:#81B29A22;color:var(--accent)">Systems Thinking</span>
+      </div>
+    </div>
+
+    <!-- QR / Footer card -->
+    <div class="card bg-gray-50 dark:bg-slate-800 p-8 text-center fade-up max-w-xl mx-auto">
+      <!-- QR placeholder -->
+      <div class="w-24 h-24 mx-auto mb-4 rounded-xl border-2 border-dashed border-gray-300 dark:border-slate-600 flex flex-col items-center justify-center">
+        <svg class="w-8 h-8 text-gray-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+        <p class="text-[9px] text-gray-400 dark:text-slate-500 mt-1">QR Code</p>
+      </div>
+      <p class="font-display font-semibold text-gray-700 dark:text-slate-200 mb-1">Live Demo / Report / Repository</p>
+      <p class="text-sm text-gray-400 dark:text-slate-500 mb-4">Scan QR or click to access project resources</p>
+      <a href="#" class="btn-primary mx-auto text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        View Project Resources
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="py-8 border-t border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-gray-400 dark:text-slate-500">
+    <div class="flex items-center gap-2">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" fill="#6C9BCF" fill-opacity=".15" stroke="#6C9BCF" stroke-width="1.5"/><path d="M10 20 Q12 10 16 12 Q20 14 22 10" stroke="#6C9BCF" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M13 22 Q14 17 16 18 Q18 19 19 16" stroke="#F4A261" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+      <span>MindBridge · Design Thinking Project 2026</span>
+    </div>
+    <span>Mahindra University · B.Tech 2nd Year · Team SE24</span>
+    <span>Built with empathy &amp; evidence ❤️</span>
+  </div>
+</footer>
+
+<!-- Back to top -->
+<button id="backToTop" class="fixed bottom-6 right-6 w-10 h-10 rounded-full shadow-lg text-white flex items-center justify-center opacity-0 pointer-events-none transition-opacity z-50" style="background:var(--primary)">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<script>
+  // MERMAID
+  mermaid.initialize({ startOnLoad: true, theme: 'base', themeVariables: { primaryColor: '#e3f2fd', primaryBorderColor: '#6C9BCF', lineColor: '#6C9BCF', fontFamily: 'DM Sans, sans-serif', fontSize: '13px' } });
+
+  // DARK MODE
+  const toggle = document.getElementById('darkToggle');
+  const sun = document.getElementById('sunIcon');
+  const moon = document.getElementById('moonIcon');
+  const html = document.documentElement;
+  toggle.addEventListener('click', () => {
+    html.classList.toggle('dark');
+    sun.classList.toggle('hidden');
+    moon.classList.toggle('hidden');
+  });
+
+  // INTERSECTION OBSERVER
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // BACK TO TOP
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btt.style.opacity = window.scrollY > 400 ? '1' : '0';
+    btt.style.pointerEvents = window.scrollY > 400 ? 'all' : 'none';
+  });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // NAV SHADOW ON SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(108,155,207,.12)' : 'none';
+  });
+</script>
+</body>
+</html>
